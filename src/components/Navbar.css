@@ -6,6 +6,15 @@
   width: 100%;
   z-index: 1000;
   box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  /* padding küçülürken hafif yumuşak, büyürken hızlı: ease-out ile kısa süre */
+  transition: padding 0.08s ease-out, backdrop-filter 0.25s ease, background 0.35s linear;
+  will-change: padding, backdrop-filter, background;
+}
+
+.navbar.shrink {
+  padding: 0.4rem 0;
+  backdrop-filter: saturate(180%) blur(10px);
+  background: linear-gradient(135deg, rgba(102,126,234,0.9) 0%, rgba(118,75,162,0.9) 100%);
 }
 
 .nav-container {
@@ -23,6 +32,11 @@
   font-size: 1.8rem;
   font-weight: 600;
   text-decoration: none;
+  transition: font-size 0.3s ease;
+}
+
+.navbar.shrink .nav-logo h2 {
+  font-size: 1.4rem;
 }
 
 .nav-logo {
@@ -132,9 +146,11 @@
   .nav-menu {
     position: fixed;
     top: 70px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 70px);
+  left: auto; 
+  right: -100%;
+    width: 50%;
+  height: 50vh; 
+ 
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     flex-direction: column;
     justify-content: flex-start;
@@ -142,10 +158,14 @@
     gap: 0;
     padding-top: 2rem;
     transition: all 0.3s ease;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  overflow-y: auto;
   }
   
   .nav-menu.active {
-    left: 0;
+    right: 0;
   }
   
   .nav-item {

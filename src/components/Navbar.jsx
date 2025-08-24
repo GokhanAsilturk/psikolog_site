@@ -1,10 +1,26 @@
 import { Link, useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Navbar.css'
 
 function Navbar() {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isShrunk, setIsShrunk] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 10px üzeri scroll'da küçült
+      if (window.scrollY > 10) {
+        setIsShrunk(true)
+  document.body.classList.add('nav-shrink')
+      } else {
+        setIsShrunk(false)
+  document.body.classList.remove('nav-shrink')
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -31,7 +47,7 @@ function Navbar() {
   }
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isShrunk ? 'shrink' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo" onClick={handleLogoClick}>
           <h2>Dr. Psikolog</h2>

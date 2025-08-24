@@ -1,5 +1,5 @@
 .about {
-  padding-top: 80px;
+  padding-top: 0 !important; /* Navbar altına uzat */
 }
 
 .about-hero {
@@ -8,6 +8,29 @@
   padding: 6rem 2rem;
   text-align: center;
   height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 110px;
+  background: linear-gradient(to bottom,
+    rgba(248,249,250,0) 0%,
+    rgba(248,249,250,0.018) 22%,
+    rgba(248,249,250,0.05) 38%,
+    rgba(248,249,250,0.1) 54%,
+    rgba(248,249,250,0.18) 68%,
+    rgba(248,249,250,0.3) 80%,
+    rgba(248,249,250,0.48) 90%,
+    rgba(248,249,250,0.68) 96%,
+    #f8f9fa 100%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 80%);
 }
 
 .about-hero h1 {
@@ -230,8 +253,15 @@
 }
 
 @media (max-width: 768px) {
+  .about { padding-top: 0 !important; }
   .about-hero {
     padding: 4rem 1rem;
+  padding: 4.5rem 1rem 2.2rem; /* Alt boşluğu küçült */
+  height: auto;
+  min-height: 55vh; /* Dikeyde yeterli alan ama fazla değil */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   }
   
   .about-hero h1 {
